@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link rel="preload" href="style.css" as="style">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho&display=swap" rel="stylesheet">
+    <title>실업률과 GDP의 관계</title>
+    <meta charset="utf-8">
+
+<body>
+    <div class="fuck"></div>
+
+    <div style="margin: 0 auto; text-align: center;">
+        <br>
+        <button class="jb">Unemp. Rate</button>
+        <button class="jb" onclick="location.href='index2.html'">Birth Rate</button>
+        <br>
+        <br>
+        <br>
+        <br> 
+        <span class="zen-old-mincho-regular text">領    域    展    開</span>
+    </div>
+    
+    
+    <canvas id="myChart1"></canvas>
+    <div id="me"></div>
+    <img src="jh.png" id="jh" style="width: 100px; height: 200px;">
+    
+   
+    
+    <div class="l-float-button">
+        <button class="fb b_target sF" style="width:200px" onclick="ryoten()"><span class="zen-old-mincho-regular">領域展開: OFF</span></button>
+    </div>
+    <div class="float-button">
+        <button class="fb" id="germany" onclick="germany()">Germany</button>
+        <button class="fb" id="canada" onclick="canada()">Canada</button>
+        <button class="fb" id="vietnam" onclick="vietnam()">Vietnam</button>
+        <button class="fb" id="india" onclick="india()">India</button>
+    </div>
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        const body = document.querySelector("body");
+
+        document.addEventListener("DOMContentLoaded", function() {
+            initChart();
+        })
+
+
+        function initChart() {
+            makeCanvas();
+
+
+
+            const ctx = document.getElementById("myChart1");
+
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: ["", "", "", "", "", ""],
+                    datasets: [{
+
+                        label: "UNEMP. RATE",
+                        backgroundColor: '#333333',
+                        data: [0, 0, 0, 0, 0, 0],
+                        borderWidth: 1,
+                    }, ],
+                },
+            });
+        }
+
+        function makeCanvas() {
+            document.getElementById("myChart1").remove();
+            const newCanvas = document.createElement("canvas");
+            newCanvas.id = "myChart1";
+            const me = document.getElementById("me");
+            body.insertBefore(newCanvas, me);
+        }
+
+        function germany() {
+            makeCanvas();
+
+            d3.csv("csv/germany_unemp.csv").then(data => {
+
+                const points = data.map(d => ({
+                    x: +d["Unemployment Rate"],
+                    y: +d["GDP달러_10억단위"]/1000
+                }));
+
+                new Chart(document.getElementById('myChart1'), {
+                    type: 'scatter',
+                    data: {
+                        datasets: [{
+                            pointRadius: 7,
+                            label: '독일',
+                            data: points,
+                            pointHoverRadius: 12,
+                            backgroundColor: '#333333',
+                            showLine: false,
+                        }]
+                    },
+                    options: {
+                        pointRadius: 5,
+                        scales: {
+                            x: {
+                                type: 'linear',
+                                title: {
+                                    display: true,
+                                    text: "Unemployment Rate (%)"
+                                }
+                            },
+                            y: {
+                                type: 'linear',
+                                title: {
+                                    display: true,
+                                    text: "GDP (1T USD)"
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        }
+
+        function canada() {
+            makeCanvas();
+
+            d3.csv("csv/canada_unemp.csv").then(data => {
+
+                const points = data.map(d => ({
+                    x: +d["Unemployment Rate"],
+                    y: +d["GDP달러_10억단위"]/1000
+                }));
+
+                new Chart(document.getElementById('myChart1'), {
+                    type: 'scatter',
+                    data: {
+                        datasets: [{
+                            pointRadius: 7,
+                            label: '캐나다',
+                            data: points,
+                            backgroundColor: '#EA2439',
+                            pointHoverRadius: 12,
+                            showLine: false,
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                type: 'linear',
+                                title: {
+                                    display: true,
+                                    text: "Unemployment Rate (%)"
+                                }
+                            },
+                            y: {
+                                type: 'linear',
+                                title: {
+                                    display: true,
+                                    text: "GDP (1T USD)"
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        }
+
+        function vietnam() {
+            makeCanvas();
+
+            d3.csv("csv/vietnam_unemp.csv").then(data => {
+
+                const points = data.map(d => ({
+                    x: +d["Unemployment Rate"],
+                    y: +d["GDP달러_10억단위"]/1000
+                }));
+
+                new Chart(document.getElementById('myChart1'), {
+                    type: 'scatter',
+                    data: {
+                        datasets: [{
+                            pointRadius: 7,
+                            label: '베트남',
+                            data: points,
+                            backgroundColor: '#ffcd00',
+                            pointHoverRadius: 12,
+                            showLine: false,
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                type: 'linear',
+                                title: {
+                                    display: true,
+                                    text: "Unemployment Rate (%)"
+                                }
+                            },
+                            y: {
+                                type: 'linear',
+                                title: {
+                                    display: true,
+                                    text: "GDP (1T USD)"
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        }
+
+        function india() {
+            makeCanvas();
+
+            d3.csv("csv/india_unemp.csv").then(data => {
+
+                const points = data.map(d => ({
+                    x: +d["Unemployment Rate"],
+                    y: +d["GDP달러_10억단위"]/1000
+                }));
+
+                new Chart(document.getElementById('myChart1'), {
+                    type: 'scatter',
+                    data: {
+                        datasets: [{
+                            pointRadius: 7,
+                            label: '인도',
+                            data: points,
+                            backgroundColor: '#046a38',
+                            pointHoverRadius: 12,
+                            showLine: false,
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                type: 'linear',
+                                title: {
+                                    display: true,
+                                    text: "Unemployment Rate (%)"
+                                }
+                            },
+                            y: {
+                                type: 'linear',
+                                title: {
+                                    display: true,
+                                    text: "GDP (1T USD)"
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        }
+			
+			document.addEventListener('mousemove', (e) => {
+					let mouseX = e.pageX - 50; 
+					let mouseY = e.pageY -100; 
+
+					let cursor = document.querySelector('#jh');
+					cursor.style.left = mouseX + 'px';
+					cursor.style.top = mouseY + 'px';
+			})
+        
+
+        const jh = document.getElementById("jh");
+
+        document.addEventListener("click", () => {
+          // 회전 시작
+          jh.classList.add("rotate");
+
+          // 3초 뒤에 멈춤 (원하는 시간으로 바꿔도 됨!)
+          setTimeout(() => {
+            jh.classList.remove("rotate");
+          }, 600);
+        });
+
+                
+            
+            
+        
+    </script>
+</body>
+
+</html>

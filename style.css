@@ -1,0 +1,248 @@
+body{
+ -ms-overflow-style: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+ }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+.float-button{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2;
+  
+}
+
+.fb {
+    margin-left: 8px;
+    display: flex;
+    float: left;
+    text-align: center;
+    text-decoration: none;
+    width: 100px;
+    height: 45px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+.fb:hover {
+  background-color: #212121;
+  box-shadow: 0px 8px 20px rgb(0, 0, 0, 0.4);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+
+
+.jb {
+    z-index: 2;
+    text-align: center;
+      text-decoration: none;
+      width: 170px;
+      height: 55px;
+      font-family: 'Roboto', sans-serif;
+      font-size: 15px;
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 500;
+      color: #000;
+      background-color: #fff;
+      border: none;
+      border-radius: 45px;
+      box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease 0s;
+      cursor: pointer;
+      outline: none;
+}
+
+.jb:hover {
+  background-color: #212121;
+  box-shadow: 0px 8px 10px rgb(28, 28, 28, 0.4);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+
+
+.sF {
+    margin-left: 8px;
+    display: flex;
+    float: left;
+    text-align: center;
+    text-decoration: none;
+    width: 100px;
+    height: 45px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+.sT {
+    margin-left: 8px;
+    display: flex;
+    float: left;
+    text-align: center;
+    text-decoration: none;
+    width: 100px;
+    height: 45px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: #000000;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+.sF:hover {
+  background-color: #212121;
+  box-shadow: 0px 8px 20px rgb(0, 0, 0, 0.4);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.sT:hover{
+    background-color: #ffffff;
+    box-shadow: 0px 8px 20px rgb(0, 0, 0, 0.4);
+    color: #000000;
+    transform: translateY(-3px)
+}
+
+
+
+#myChart1{
+    width: 600px;
+    height: 600px;
+    margin: 0 auto;
+    display: block;
+    
+} /* canvas */
+
+
+
+.fuck{
+    height: 100%; 
+    width: 100%; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    background-color: #ffffff; 
+    z-index: 3;
+    animation: fadeOut 1s ease-in-out forwards;
+} /* 초반 화면 페이드 */
+
+@keyframes fadeOut{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        display: none
+        
+    }
+}
+
+
+
+button{
+    animation: fadeOut2 1s ease-in-out forwards;
+}
+
+@keyframes fadeOut2{
+    0%{
+        opacity: 0;
+        display: none;
+    }
+    100%{
+        opacity: 1;
+
+    }
+}
+
+#jh{
+    z-index: -1;
+    position: absolute;
+    
+}
+
+.rotate{
+    animation: spin 0.001s ease-in-out infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.zen-old-mincho-regular {
+  font-family: "Zen Old Mincho", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.l-float-button{
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 2;
+}
+
+.text{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    opacity: 0;
+    font-size: 100px;
+    z-index: 1;
+    text-shadow: -1px 0px white, 0px 1px white, 1px 0px white, 0px -1px white;
+    user-select: none;
+}

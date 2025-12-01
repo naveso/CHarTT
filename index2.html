@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link rel="preload" href="style.css" as="style">
+    <link rel="stylesheet" href="style.css">
+    <title>출생률과 GDP의 관계</title>
+    <meta charset="utf-8">
+
+<body>
+    <div class="fuck"></div>
+
+    <center>
+        <br>
+        <button class="jb" onclick="location.href='index.html'">Unemp. Rate</button>
+        <button class="jb">Birth Rate</button>
+        <br>
+        <br>
+        <br>
+        <br>
+    </center>
+
+    <canvas id="myChart1"></canvas>
+    <div id="me"></div>
+  <img src="jh.png" id="jh" style="width: 100px; height: 200px;">
+
+    <div class="float-button">
+        <button class="fb" onclick="germany()">Germany</button>
+        <button class="fb" onclick="canada()">Canada</button>
+        <button class="fb" onclick="phil()">Philip.</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <script>
+        const body = document.querySelector("body");
+
+        document.addEventListener("DOMContentLoaded", function() {
+            initChart();
+        })
+
+
+        function initChart() {
+            makeCanvas();
+
+
+
+            const ctx = document.getElementById("myChart1");
+
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: ["", "", "", "", "", ""],
+                    datasets: [{
+
+                        label: "BIRTH RATE",
+                        backgroundColor: '#000000',
+                        data: [0, 0, 0, 0, 0, 0],
+                        borderWidth: 1,
+                    }, ],
+                },
+            });
+        }
+
+        function makeCanvas() {
+            document.getElementById("myChart1").remove();
+            const newCanvas = document.createElement("canvas");
+            newCanvas.id = "myChart1";
+            const me = document.getElementById("me");
+            body.insertBefore(newCanvas, me);
+        }
+
+        function germany() {
+            makeCanvas();
+
+            d3.csv("csv/germany_birth.csv").then(data => {
+
+                const points = data.map(d => ({
+                    x: +d["Birth Rate"],
+                    y: +d["GDP달러_조단위"]
+                }));
+
+                new Chart(document.getElementById('myChart1'), {
+                    type: 'scatter',
+                    data: {
+                        datasets: [{
+                            pointRadius: 7,
+                            label: '독일',
+                            data: points,
+                            backgroundColor: '#333333',
+                            showLine: false,
+                        }]
+                    },
+                    options: {
+                        pointRadius: 5,
+                        scales: {
+                            x: {
+                                type: 'linear',
+                                title: {
+                                    display: true,
+                                    text: "Birth Rate (명)"
+                                }
+                            },
+                            y: {
+                                type: 'linear',
+                                title: {
+                                    display: true,
+                                    text: "GDP (1T USD)"
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        }
+
+        function canada() {
+            makeCanvas();
+
+            d3.csv("csv/canada_birth.csv").then(data => {
+
+                const points = data.map(d => ({
+                    x: +d["Birth Rate"],
+                    y: +d["GDP달러_조단위"]
+                }));
+
+                new Chart(document.getElementById('myChart1'), {
+                    type: 'scatter',
+                    data: {
+                        datasets: [{
+                            pointRadius: 7,
+                            label: '캐나다',
+                            data: points,
+                            backgroundColor: '#EA2439',
+                            showLine: false,
+                        }]
+                    },
+                    options: {
+                        pointRadius: 5,
+                        scales: {
+                            x: {
+                                type: 'linear',
+                                title: {
+                                    display: true,
+                                    text: "Birth Rate (명)"
+                                }
+                            },
+                            y: {
+                                type: 'linear',
+                                title: {
+                                    display: true,
+                                    text: "GDP (1T USD)"
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        }
+
+        function phil() {
+            makeCanvas();
+
+            d3.csv("csv/phil_birth.csv").then(data => {
+
+                const points = data.map(d => ({
+                    x: +d["Birth Rate"],
+                    y: +d["GDP달러_조단위"]
+                }));
+
+                new Chart(document.getElementById('myChart1'), {
+                    type: 'scatter',
+                    data: {
+                        datasets: [{
+                            pointRadius: 7,
+                            label: '필리핀',
+                            data: points,
+                            backgroundColor: '#0032a0',
+                            showLine: false,
+                        }]
+                    },
+                    options: {
+                        pointRadius: 5,
+                        scales: {
+                            x: {
+                                type: 'linear',
+                                title: {
+                                    display: true,
+                                    text: "Birth Rate (명)"
+                                }
+                            },
+                            y: {
+                                type: 'linear',
+                                title: {
+                                    display: true,
+                                    text: "GDP (1T USD)"
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        }
+      document.addEventListener('mousemove', (e) => {
+          let mouseX = e.pageX - 50; 
+          let mouseY = e.pageY -100; 
+
+          let cursor = document.querySelector('#jh');
+          cursor.style.left = mouseX + 'px';
+          cursor.style.top = mouseY + 'px';
+      })
+
+        const jh = document.getElementById("jh");
+
+        document.addEventListener("click", () => {
+          // 회전 시작
+          jh.classList.add("rotate");
+
+          // 3초 뒤에 멈춤 (원하는 시간으로 바꿔도 됨!)
+          setTimeout(() => {
+            jh.classList.remove("rotate");
+          }, 600);
+        });
+    </script>
+</body>
+
+</html>
